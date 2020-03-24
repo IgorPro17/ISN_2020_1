@@ -1,0 +1,10 @@
+{
+  "name": "CoffeeApp",
+  "short_name": "CApp",
+  "theme_color": "#a79b67",
+  "background_color": "#e7e3c9",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/"
+}
