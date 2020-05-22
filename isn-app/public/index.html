@@ -20,7 +20,7 @@
 		}
 	</style>
 </head>
-<body class="gradient" style="height:70%">
+<body class="gradient" style="height:70%" onload = "setTimeout(notifSet (), getRandomInt(1000, 10000)), localStorage.clear();">
 	<noscript>
 		<strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
 	</noscript>
@@ -33,6 +33,46 @@
 				this.navigator.serviceWorker.register('/sw.js');
 			});
 		}
+	function notifyMe () {
+		var textnotification = randomstr(getRandomInt(5, 15)) 
+		var notification = new Notification ("CoffeeShop", {
+			tag : "ache-mail",
+			body : textnotification,
+			icon : "https://www.clipartmax.com/png/full/194-1949969_starbucks-logo-png-mtf-pinterest-starbucks-logo-starbucks-high-resolution-starbucks-logo.png"
+		});
+		localStorage.setItem('text', localStorage.getItem('text') + " " + textnotification);
+		console.log(localStorage.getItem('text'));
+	}
+	
+	function notifSet () {
+		if (!("Notification" in window))
+			alert ("Ваш браузер не поддерживает уведомления.");
+		else if (Notification.permission === "granted")
+		setInterval(notifyMe, 5000);
+		else if (Notification.permission !== "denied") {
+			Notification.requestPermission (function (permission) {
+				if (!('permission' in Notification))
+					Notification.permission = permission;
+				if (permission === "granted")
+				setInterval(notifyMe, 5000);
+			});
+		}
+	}
+
+	function getRandomInt(min, max) {
+ 		return Math.floor(Math.random() * (max - min)) + min;
+	}
+
+	function randomstr(len) {
+    chrs = 'abdehkmnpswxzABDEFGHKMNPQRSTWXZ123456789';
+    var str = '';
+    for (var i = 0; i < len; i++) {
+        var pos = Math.floor(Math.random() * chrs.length);
+        str += chrs.substring(pos,pos+1);
+    }
+    return str;
+}
+
 	</script>
 </body>
 </html>
